@@ -23,7 +23,10 @@
     "it-books",
     "pet-project",
     "single-page-app",
-    "react"
+    "react",
+    "react-router-dom",
+    "redux",
+    "material-ui"
   ],
   "author": "Anton Lykov",
   "bugs": {
