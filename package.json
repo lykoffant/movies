@@ -30,8 +30,11 @@
     "url": "https://github.com/lykoffant/movies/issues"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.2",
