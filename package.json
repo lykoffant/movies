@@ -20,7 +20,7 @@
     "url": "git+https://github.com/lykoffant/omdb-client.git"
   },
   "keywords": [
-    "it-books",
+    "omdb-client",
     "pet-project",
     "single-page-app",
     "react",
