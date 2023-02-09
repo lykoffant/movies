@@ -1,5 +1,5 @@
 {
-  "name": "movies",
+  "name": "omdb-client",
   "private": true,
   "version": "0.0.0",
   "description": "Catalog of movies",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lykoffant/movies.git"
+    "url": "git+https://github.com/lykoffant/omdb-client.git"
   },
   "keywords": [
     "it-books",
@@ -30,7 +30,7 @@
   ],
   "author": "Anton Lykov",
   "bugs": {
-    "url": "https://github.com/lykoffant/movies/issues"
+    "url": "https://github.com/lykoffant/omdb-client/issues"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

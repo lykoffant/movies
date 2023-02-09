@@ -1,4 +1,4 @@
-# Movies
+# OMDb Client
 
 Catalog of movies.
 
