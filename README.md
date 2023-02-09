@@ -1,6 +1,6 @@
 # OMDb Client
 
-Catalog of movies.
+Catalog of movies, series and games.
 
 > This project was bootstrapped with [vite](https://github.com/vitejs/vite) and [react-third-hand](https://github.com/YaroslavWeb/react-third-hand).
 
