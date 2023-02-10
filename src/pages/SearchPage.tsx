@@ -1,6 +1,8 @@
 import { CircularProgress, Container, Typography } from '@mui/material';
 import { useOutletContext } from 'react-router-dom';
 
+import { ErrorAlert } from '../components/ErrorAlert';
+
 import { FoundList } from '../components/FoundList';
 
 import { OutletContextType } from '../components/Layout';
@@ -10,6 +12,7 @@ import { useAppSelector } from '../hooks/useAppSelector';
 function SearchPage() {
   const { sx } = useOutletContext<OutletContextType>();
   const isLoading = useAppSelector((state) => state.foundList.isLoading);
+  const error = useAppSelector((state) => state.foundList.error);
 
   return (
     <Container
@@ -22,6 +25,8 @@ function SearchPage() {
       </Typography>
 
       <SearchForm />
+
+      {error && <ErrorAlert>{error}</ErrorAlert>}
 
       {isLoading ? <CircularProgress sx={{ m: 'auto' }} /> : <FoundList />}
     </Container>
