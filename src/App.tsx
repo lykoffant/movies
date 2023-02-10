@@ -1,10 +1,16 @@
-import styles from './App.module.scss';
+import { Routes, Route } from 'react-router-dom';
+
+import { Layout } from './components/Layout';
+
+import { SearchPage } from './pages/SearchPage';
 
 function App() {
   return (
-    <div className={styles.parent}>
-      <h1>Movies</h1>
-    </div>
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<SearchPage />} />
+      </Route>
+    </Routes>
   );
 }
 
