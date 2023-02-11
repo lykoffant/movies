@@ -1,30 +1,41 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { FoundItemShortData, ResData, ResStatus } from '../types/data.types';
+import {
+  FoundItemShortData,
+  ResData,
+  ResStatus,
+  SearchType,
+} from '../types/data.types';
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 export const searchItems = createAsyncThunk<
   FoundItemShortData[],
-  string,
+  { searchValue: string; searchType: SearchType },
   { rejectValue: string }
->('found-list/searchItems', async function (title, { rejectWithValue }) {
-  const res = await fetch(
-    `https://www.omdbapi.com/?apikey=${API_KEY}&s=${title}`,
-  );
+>(
+  'found-list/searchItems',
+  async function ({ searchValue, searchType }, { rejectWithValue }) {
+    const searchTypeParam =
+      searchType !== SearchType.ALL ? `&type=${searchType}` : '';
 
-  if (!res.ok) {
-    return rejectWithValue('Server Error');
-  }
+    const res = await fetch(
+      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchValue}${searchTypeParam}`,
+    );
 
-  const data: ResData = await res.json();
+    if (!res.ok) {
+      return rejectWithValue('Server Error');
+    }
 
-  if (data.Response === ResStatus.FALSE) {
-    return rejectWithValue(data.Error);
-  }
+    const data: ResData = await res.json();
 
-  return data.Search;
-});
+    if (data.Response === ResStatus.FALSE) {
+      return rejectWithValue(data.Error);
+    }
+
+    return data.Search;
+  },
+);
 
 interface FoundListState {
   list: FoundItemShortData[];

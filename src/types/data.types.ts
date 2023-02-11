@@ -1,3 +1,10 @@
+export enum SearchType {
+  ALL = 'all',
+  MOVIE = 'movie',
+  SERIES = 'series',
+  GAME = 'game',
+}
+
 enum FoundItemType {
   MOVIE = 'movie',
   SERIES = 'series',
