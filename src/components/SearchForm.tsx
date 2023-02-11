@@ -12,7 +12,8 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent, useEffect, FormEvent } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { searchItems } from '../store/foundListSlice';
@@ -20,24 +21,50 @@ import { SearchType } from '../types/data.types';
 
 function SearchForm() {
   const dispatch = useAppDispatch();
-
-  const [searchValue, setSearchValue] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchValue, setSearchValue] = useState<string>(
+    searchParams.get('s') || '',
+  );
+  const [searchType, setSearchType] = useState<SearchType>(
+    (searchParams.get('type') as SearchType) || SearchType.ALL,
+  );
   const searchInputRef = useRef<HTMLDivElement>(null);
 
-  const [searchType, setSearchType] = useState<SearchType>(SearchType.ALL);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchType(event.target.value as SearchType);
+    const value = event.target.value as SearchType;
+    setSearchType(value);
   };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    setSearchParams((prevSearchParams) => {
+      if (searchValue.trim()) {
+        prevSearchParams.set('s', searchValue);
+      } else {
+        prevSearchParams.delete('s');
+      }
+
+      prevSearchParams.set('type', searchType);
+
+      return prevSearchParams;
+    });
+
+    dispatch(searchItems({ searchValue, searchType }));
+  };
+
+  useEffect(() => {
+    if (searchValue) {
+      dispatch(searchItems({ searchValue, searchType }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Box
       component='form'
       sx={{ mb: 4, display: 'flex', flexWrap: 'wrap' }}
-      onSubmit={(e) => {
-        e.preventDefault();
-        dispatch(searchItems({ searchValue, searchType }));
-      }}
+      onSubmit={(e) => handleSubmit(e)}
     >
       <FormControl sx={{ mr: 1, flexGrow: 1 }} variant='outlined'>
         <InputLabel htmlFor='search-movies-form'>Search</InputLabel>
@@ -47,7 +74,10 @@ function SearchForm() {
           type='text'
           value={searchValue}
           label='Search'
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            setSearchValue(value);
+          }}
           endAdornment={
             searchValue && (
               <InputAdornment position='end'>
