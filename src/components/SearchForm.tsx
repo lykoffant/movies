@@ -1,19 +1,17 @@
-import { Search as SearchIcon, Close as CloseIcon } from '@mui/icons-material';
+import { Search as SearchIcon } from '@mui/icons-material';
 import {
   Box,
   Button,
   FormControl,
   FormControlLabel,
   FormLabel,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
   Radio,
   RadioGroup,
 } from '@mui/material';
-import { useState, useRef, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
+import { SearchInput } from './SearchInput';
 
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { searchItems } from '../store/foundListSlice';
@@ -28,7 +26,6 @@ function SearchForm() {
   const [searchType, setSearchType] = useState<SearchType>(
     (searchParams.get('type') as SearchType) || SearchType.ALL,
   );
-  const searchInputRef = useRef<HTMLDivElement>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as SearchType;
@@ -59,36 +56,11 @@ function SearchForm() {
       sx={{ mb: 4, display: 'flex', flexWrap: 'wrap' }}
       onSubmit={(e) => handleSubmit(e)}
     >
-      <FormControl sx={{ mr: 1, flexGrow: 1 }} variant='outlined'>
-        <InputLabel htmlFor='search-movies-form'>Search</InputLabel>
-        <OutlinedInput
-          ref={searchInputRef}
-          id='search-movies-form'
-          type='text'
-          value={searchValue}
-          label='Search'
-          onChange={(e) => {
-            const value = e.target.value;
-            setSearchValue(value);
-          }}
-          endAdornment={
-            searchValue && (
-              <InputAdornment position='end'>
-                <IconButton
-                  aria-label='clear search movie title'
-                  edge='end'
-                  onClick={() => {
-                    setSearchValue('');
-                    searchInputRef.current?.querySelector('input')?.focus();
-                  }}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </InputAdornment>
-            )
-          }
-        />
-      </FormControl>
+      <SearchInput
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        sx={{ mr: 1, flexGrow: 1 }}
+      />
 
       <FormControl sx={{ order: 3, width: '100%', mt: 2 }}>
         <FormLabel id='type-radio-buttons-group-label'>Type</FormLabel>
