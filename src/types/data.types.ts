@@ -28,7 +28,7 @@ interface Res {
   Response: ResStatus;
 }
 
-interface FoundData extends Res {
+export interface FoundData extends Res {
   Response: ResStatus.TRUE;
   Search: FoundItemShortData[];
   totalResults: number;

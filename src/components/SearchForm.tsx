@@ -12,7 +12,7 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import { useState, useRef, ChangeEvent, useEffect, FormEvent } from 'react';
+import { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../hooks/useAppDispatch';
@@ -52,13 +52,6 @@ function SearchForm() {
 
     dispatch(searchItems({ searchValue, searchType }));
   };
-
-  useEffect(() => {
-    if (searchValue) {
-      dispatch(searchItems({ searchValue, searchType }));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <Box
