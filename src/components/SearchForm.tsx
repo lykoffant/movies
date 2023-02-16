@@ -1,16 +1,9 @@
 import { Search as SearchIcon } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-} from '@mui/material';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { Box, Button } from '@mui/material';
+import { useState, FormEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { RadioButtonGroup } from './RadioButtonGroup';
 import { SearchInput } from './SearchInput';
 
 import { useAppDispatch } from '../hooks/useAppDispatch';
@@ -26,11 +19,6 @@ function SearchForm() {
   const [searchType, setSearchType] = useState<SearchType>(
     (searchParams.get('type') as SearchType) || SearchType.ALL,
   );
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value as SearchType;
-    setSearchType(value);
-  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -62,37 +50,20 @@ function SearchForm() {
         sx={{ mr: 1, flexGrow: 1 }}
       />
 
-      <FormControl sx={{ order: 3, width: '100%', mt: 2 }}>
-        <FormLabel id='type-radio-buttons-group-label'>Type</FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby='type-radio-buttons-group-label'
-          name='type-radio-buttons-group'
-          value={searchType}
-          onChange={handleChange}
-        >
-          <FormControlLabel
-            value={SearchType.ALL}
-            control={<Radio />}
-            label='All'
-          />
-          <FormControlLabel
-            value={SearchType.MOVIE}
-            control={<Radio />}
-            label='Movie'
-          />
-          <FormControlLabel
-            value={SearchType.SERIES}
-            control={<Radio />}
-            label='Series'
-          />
-          <FormControlLabel
-            value={SearchType.GAME}
-            control={<Radio />}
-            label='Game'
-          />
-        </RadioGroup>
-      </FormControl>
+      <RadioButtonGroup
+        id='type-radio-buttons-group-label'
+        label='Type'
+        name='type-radio-buttons-group'
+        group={[
+          { label: 'All', value: SearchType.ALL },
+          { label: 'Movie', value: SearchType.MOVIE },
+          { label: 'Series', value: SearchType.SERIES },
+          { label: 'Game', value: SearchType.GAME },
+        ]}
+        searchType={searchType}
+        setSearchType={setSearchType}
+        sx={{ order: 3, width: '100%', mt: 2 }}
+      />
 
       <Button variant='contained' type='submit'>
         <SearchIcon />
