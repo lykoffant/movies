@@ -20,18 +20,19 @@ export const searchItems = createAsyncThunk<
     { searchValue, searchType, page },
     { rejectWithValue, dispatch },
   ) {
-    const searchTypeParam =
-      searchType !== SearchType.ALL ? `&type=${searchType}` : '';
-
     dispatch(setPage({ page }));
 
-    const res = await fetch(
-      'https://www.omdbapi.com/?' +
-        `apikey=${API_KEY}` +
-        `&s=${searchValue}` +
-        searchTypeParam +
-        `&page=${page}`,
-    );
+    const urlSearchParams = new URLSearchParams({
+      apikey: API_KEY,
+      s: searchValue,
+      page: String(page),
+    });
+
+    if (searchType !== SearchType.ALL) {
+      urlSearchParams.set('type', searchType);
+    }
+
+    const res = await fetch('https://www.omdbapi.com/?' + urlSearchParams);
 
     if (!res.ok) {
       return rejectWithValue('Server Error');
