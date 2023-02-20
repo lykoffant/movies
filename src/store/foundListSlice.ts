@@ -26,7 +26,11 @@ export const searchItems = createAsyncThunk<
     dispatch(setPage({ page }));
 
     const res = await fetch(
-      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchValue}${searchTypeParam}&page=${page}`,
+      'https://www.omdbapi.com/?' +
+        `apikey=${API_KEY}` +
+        `&s=${searchValue}` +
+        searchTypeParam +
+        `&page=${page}`,
     );
 
     if (!res.ok) {
