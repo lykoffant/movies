@@ -26,6 +26,7 @@ function SearchForm() {
     setSearchParams((prevSearchParams) => {
       if (searchValue.trim()) {
         prevSearchParams.set('s', searchValue);
+        prevSearchParams.delete('page');
       } else {
         prevSearchParams.delete('s');
       }
@@ -35,7 +36,7 @@ function SearchForm() {
       return prevSearchParams;
     });
 
-    dispatch(searchItems({ searchValue, searchType }));
+    dispatch(searchItems({ searchValue, searchType, page: 1 }));
   };
 
   return (

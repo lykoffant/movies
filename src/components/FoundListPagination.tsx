@@ -1,5 +1,5 @@
 import { Pagination, PaginationProps } from '@mui/material';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../hooks/useAppDispatch';
@@ -9,15 +9,11 @@ import { SearchType } from '../types/data.types';
 
 function FoundListPagination(props: PaginationProps) {
   const dispatch = useAppDispatch();
+  const page = useAppSelector((state) => state.foundList.page);
   const totalPage = useAppSelector((state) => state.foundList.totalPage);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [page, setPage] = useState<number>(
-    Number(searchParams.get('page')) || 1,
-  );
 
   const handleChange = (_: ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-
     setSearchParams((prevSearchParams) => {
       prevSearchParams.set('page', String(value));
 

@@ -12,18 +12,21 @@ const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 export const searchItems = createAsyncThunk<
   FoundData,
-  { searchValue: string; searchType: SearchType; page?: number },
+  { searchValue: string; searchType: SearchType; page: number },
   { rejectValue: string }
 >(
   'found-list/searchItems',
-  async function ({ searchValue, searchType, page }, { rejectWithValue }) {
+  async function (
+    { searchValue, searchType, page },
+    { rejectWithValue, dispatch },
+  ) {
     const searchTypeParam =
       searchType !== SearchType.ALL ? `&type=${searchType}` : '';
 
-    const pageParam = page ? `&page=${page}` : '';
+    dispatch(setPage({ page }));
 
     const res = await fetch(
-      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchValue}${searchTypeParam}${pageParam}`,
+      `https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchValue}${searchTypeParam}&page=${page}`,
     );
 
     if (!res.ok) {
@@ -36,12 +39,15 @@ export const searchItems = createAsyncThunk<
       return rejectWithValue(data.Error);
     }
 
-    return data;
+    const dataWithPage = { ...data, page };
+
+    return dataWithPage;
   },
 );
 
 interface FoundListState {
   list: FoundItemShortData[];
+  page: number;
   totalPage: number;
   isLoading: boolean;
   error: string | null;
@@ -49,6 +55,7 @@ interface FoundListState {
 
 const initialState: FoundListState = {
   list: [],
+  page: 1,
   totalPage: 1,
   isLoading: false,
   error: null,
@@ -57,7 +64,11 @@ const initialState: FoundListState = {
 const foundListSlice = createSlice({
   name: 'found-list',
   initialState,
-  reducers: {},
+  reducers: {
+    setPage(state, action) {
+      state.page = action.payload.page;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(searchItems.pending, (state) => {
@@ -78,5 +89,7 @@ const foundListSlice = createSlice({
       });
   },
 });
+
+const { setPage } = foundListSlice.actions;
 
 export default foundListSlice.reducer;
