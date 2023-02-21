@@ -1,13 +1,13 @@
 import { GitHub as GitHubIcon } from '@mui/icons-material';
-import { AppBar, Box, Toolbar } from '@mui/material';
+import { AppBar, AppBarProps, Box, Toolbar } from '@mui/material';
 
 import { HeaderName } from './HeaderName';
 import { LogoIcon } from './LogoIcon';
 import { RepoLink } from './RepoLink';
 
-function Header() {
+function Header(props: AppBarProps) {
   return (
-    <AppBar position='static'>
+    <AppBar position='static' {...props}>
       <Toolbar variant='dense' sx={{ justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <LogoIcon sx={{ mr: 1 }} />
