@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { INITIAL_PAGE_NUMBER } from '../constants/pagination.constants';
 import {
   FoundData,
   FoundItemShortData,
@@ -60,7 +61,7 @@ interface FoundListState {
 
 const initialState: FoundListState = {
   list: [],
-  page: 1,
+  page: INITIAL_PAGE_NUMBER,
   totalPage: 1,
   isLoading: false,
   error: null,

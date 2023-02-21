@@ -10,6 +10,7 @@ import { FoundListPagination } from '../components/FoundListPagination';
 
 import { OutletContextType } from '../components/Layout';
 import { SearchForm } from '../components/SearchForm';
+import { INITIAL_PAGE_NUMBER } from '../constants/pagination.constants';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { searchItems } from '../store/foundListSlice';
@@ -27,7 +28,7 @@ function SearchPage() {
   useEffect(() => {
     const searchValue = searchParams.get('s');
     const searchType = searchParams.get('type') as SearchType;
-    const page = Number(searchParams.get('page'));
+    const page = Number(searchParams.get('page')) || INITIAL_PAGE_NUMBER;
 
     if (searchValue && searchType) {
       dispatch(
