@@ -5,9 +5,13 @@ import { BackToTopButton } from './BackToTopButton';
 
 import { Header } from './Header';
 
+interface LayoutProps {
+  pageName: string;
+}
+
 export type OutletContextType = { sx: SxProps };
 
-function Layout() {
+function Layout({ pageName }: LayoutProps) {
   return (
     <Box
       sx={{
@@ -16,7 +20,7 @@ function Layout() {
         minHeight: '100vh',
       }}
     >
-      <Header id='back-to-top-anchor' />
+      <Header id='back-to-top-anchor' pageName={pageName} />
 
       <Outlet context={{ sx: { flexGrow: 1 } }} />
 
