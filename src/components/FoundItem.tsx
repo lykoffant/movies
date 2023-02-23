@@ -45,6 +45,7 @@ function FoundItem({ itemData }: FoundItemProps) {
           gutterBottom
           variant='h5'
           component='div'
+          title={itemData.Title}
           sx={{
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
