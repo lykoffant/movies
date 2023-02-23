@@ -29,7 +29,11 @@ function FoundItem({ itemData }: FoundItemProps) {
     >
       <CardMedia
         component='img'
-        image={itemData.Poster}
+        image={
+          itemData.Poster !== 'N/A'
+            ? itemData.Poster
+            : `https://via.placeholder.com/300x445?text=${itemData.Title}`
+        }
         alt={itemData.Title}
         sx={{ mb: 'auto' }}
       />
