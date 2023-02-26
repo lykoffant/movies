@@ -29,6 +29,7 @@
     "material-ui"
   ],
   "author": "Anton Lykov",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lykoffant/omdb-client/issues"
   },

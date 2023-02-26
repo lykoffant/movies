@@ -69,3 +69,7 @@ npm run lint:style
 ```sh
 npm run lint:style:fix
 ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
