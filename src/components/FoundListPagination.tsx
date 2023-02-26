@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { searchItems } from '../store/foundListSlice';
-import { SearchType } from '../types/data.types';
+import { SearchType } from '../types/search-response.types';
 
 function FoundListPagination(props: PaginationProps) {
   const dispatch = useAppDispatch();

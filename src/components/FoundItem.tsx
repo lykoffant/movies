@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-import { FoundItemShortData as FoundItemShortData } from '../types/data.types';
+import { FoundItemShortData } from '../types/search-response.types';
 
 interface FoundItemProps {
   itemData: FoundItemShortData;

@@ -14,7 +14,7 @@ import { INITIAL_PAGE_NUMBER } from '../constants/pagination.constants';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { searchItems } from '../store/foundListSlice';
-import { SearchType } from '../types/data.types';
+import { SearchType } from '../types/search-response.types';
 
 function SearchPage() {
   const dispatch = useAppDispatch();

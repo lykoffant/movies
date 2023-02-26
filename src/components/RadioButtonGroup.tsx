@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
-import { SearchType } from '../types/data.types';
+import { SearchType } from '../types/search-response.types';
 
 interface GroupItem {
   label: string;

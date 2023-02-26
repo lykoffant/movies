@@ -8,7 +8,7 @@ import { SearchInput } from './SearchInput';
 
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { searchItems } from '../store/foundListSlice';
-import { SearchType } from '../types/data.types';
+import { SearchType } from '../types/search-response.types';
 
 function SearchForm() {
   const dispatch = useAppDispatch();

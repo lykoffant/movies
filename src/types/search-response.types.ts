@@ -1,3 +1,5 @@
+import { ErrorData, Res, ResStatus } from './common.types';
+
 export enum SearchType {
   ALL = 'all',
   MOVIE = 'movie',
@@ -5,11 +7,7 @@ export enum SearchType {
   GAME = 'game',
 }
 
-enum FoundItemType {
-  MOVIE = 'movie',
-  SERIES = 'series',
-  GAME = 'game',
-}
+type FoundItemType = Exclude<SearchType, SearchType.ALL>;
 
 export interface FoundItemShortData {
   imdbID: string;
@@ -19,24 +17,10 @@ export interface FoundItemShortData {
   Poster: string;
 }
 
-export enum ResStatus {
-  TRUE = 'True',
-  FALSE = 'False',
-}
-
-interface Res {
-  Response: ResStatus;
-}
-
 export interface FoundData extends Res {
   Response: ResStatus.TRUE;
   Search: FoundItemShortData[];
   totalResults: number;
-}
-
-interface ErrorData extends Res {
-  Response: ResStatus.FALSE;
-  Error: string;
 }
 
 export type ResData = FoundData | ErrorData;

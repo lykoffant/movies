@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { INITIAL_PAGE_NUMBER } from '../constants/pagination.constants';
+import { ResStatus } from '../types/common.types';
 import {
   FoundData,
   FoundItemShortData,
   ResData,
-  ResStatus,
   SearchType,
-} from '../types/data.types';
+} from '../types/search-response.types';
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 

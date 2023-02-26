@@ -1,18 +1,11 @@
-export enum ResStatus {
-  TRUE = 'True',
-  FALSE = 'False',
-}
-
-interface Res {
-  Response: ResStatus;
-}
+import { ErrorData, Res, ResStatus } from './common.types';
 
 interface Rating {
   Source: string;
   Value: string;
 }
 
-export interface DetailedData {
+export interface DetailedData extends Res {
   Response: ResStatus.TRUE;
   Title: string;
   Year: string;
@@ -38,11 +31,6 @@ export interface DetailedData {
   BoxOffice: string;
   Production: string;
   Website: string;
-}
-
-interface ErrorData extends Res {
-  Response: ResStatus.FALSE;
-  Error: string;
 }
 
 export type ResDetailedData = DetailedData | ErrorData;

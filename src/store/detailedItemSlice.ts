@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { ResStatus } from '../types/common.types';
 import {
-  ResStatus,
   DetailedData,
   ResDetailedData,
 } from '../types/detailed-response.types';
