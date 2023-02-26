@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import detailedItemReducer from './detailedItemSlice';
 import foundListReducer from './foundListSlice';
 
 const store = configureStore({
   reducer: {
     foundList: foundListReducer,
+    detailedItem: detailedItemReducer,
   },
 });
 
