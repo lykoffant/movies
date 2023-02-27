@@ -42,7 +42,14 @@ function DetailedItem({ details, ...props }: DetailedItemProps) {
     <Grid container spacing={2} {...props}>
       <Grid item sm={4} sx={{ mx: 'auto' }}>
         <Paper elevation={3} sx={{ overflow: 'hidden' }}>
-          <Img src={details.Poster} alt={details.Title} />
+          <Img
+            src={
+              details.Poster !== 'N/A'
+                ? details.Poster
+                : `https://via.placeholder.com/300x445?text=${details.Title}`
+            }
+            alt={details.Title}
+          />
         </Paper>
       </Grid>
 
